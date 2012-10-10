@@ -24,17 +24,11 @@ git clone http://github.com/bcwaldon/twoface
 cd twoface
 sudo python setup.py install
 
-cd /home/git/.ssh
 sudo mkdir /home/git/.ssh
 sudo cp /home/ubuntu/.ssh/authorized_keys /home/git/.ssh/
 sudo chown -R git:git /home/git/.ssh
-sudo chmod 700 !$
 sudo chmod 600 /home/git/.ssh/*
 
-sudo su git -
-
 sudo cat<<EOF | sudo tee /etc/cron.d/twoface
-0 * * * *  twoface-update
+*/1 * * * *  sudo su git -; twoface-update
 EOF
-
-
