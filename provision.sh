@@ -10,9 +10,9 @@ EOF
 
 sudo mkdir /etc/twoface
 sudo cat<<EOF | sudo tee /etc/twoface/repositories
-http://github.com/openstack/glance
 http://github.com/openstack/nova
-http://github.com/
+http://github.com/openstack/glance
+http://github.com/openstack/cinder
 EOF
 
 sudo apt-get update
@@ -29,6 +29,4 @@ sudo cp /home/ubuntu/.ssh/authorized_keys /home/git/.ssh/
 sudo chown -R git:git /home/git/.ssh
 sudo chmod 600 /home/git/.ssh/*
 
-sudo cat<<EOF | sudo tee /etc/cron.d/twoface
-*/1 * * * *  sudo su git -; twoface-update
-EOF
+echo "*/1 * * * *   /usr/local/bin/twoface-update 2&>1 /tmp/twoface-update.log" | crontab -u git -
