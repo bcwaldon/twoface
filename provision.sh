@@ -29,4 +29,4 @@ sudo cp /home/ubuntu/.ssh/authorized_keys /home/git/.ssh/
 sudo chown -R git:git /home/git/.ssh
 sudo chmod 600 /home/git/.ssh/*
 
-echo "*/1 * * * *   /usr/local/bin/twoface-update 2&>1 /tmp/twoface-update.log" | crontab -u git -
+echo "*/1 * * * *   /usr/local/bin/twoface-update 2&>1 /tmp/twoface-update.log" | sudo crontab -u git -
