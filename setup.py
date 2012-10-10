@@ -9,5 +9,5 @@ setuptools.setup(
     author_email='bcwaldon@gmail.com',
     url='http://github.com/bcwaldon/twoface',
     packages=['twoface'],
-    scripts=['bin/twoface-init', 'bin/twoface-update'],
+    scripts=['bin/twoface-update'],
 )

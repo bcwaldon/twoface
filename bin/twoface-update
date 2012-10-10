@@ -13,5 +13,9 @@ for repo in open(args.repo_file).readlines():
     _, folder, name = repo.rsplit('/', 2)
     base_dir = os.path.join('/home/git', folder)
     repo_dir = os.path.join(base_dir, '%s.git' % name)
-    os.chdir(repo_dir)
-    subprocess.check_call(['git', 'pull'])
+    try:
+        os.mkdir(base_dir)
+        subprocess.check_call(['git', 'clone', repo, repo_dir])
+    except OSError: # repo exists
+        os.chdir(repo_dir)
+        subprocess.check_call(['git', 'pull'])

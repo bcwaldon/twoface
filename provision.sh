@@ -22,7 +22,7 @@ sudo adduser -home /home/git --disabled-password --quiet git
 
 git clone http://github.com/bcwaldon/twoface
 cd twoface
-python setup.py install
+sudo python setup.py install
 
 cd /home/git/.ssh
 sudo mkdir /home/git/.ssh
@@ -32,4 +32,9 @@ sudo chmod 700 !$
 sudo chmod 600 /home/git/.ssh/*
 
 sudo su git -
-twoface-init
+
+sudo cat<<EOF | sudo tee /etc/cron.d/twoface
+0 * * * *  twoface-update
+EOF
+
+
