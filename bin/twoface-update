@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import argparse
+import subprocess
+import os
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--repo-file', default='/etc/twoface/repositories')
+args = parser.parse_args()
+
+for repo in open(args.repo_file).readlines():
+    repo = repo.rstrip('\n')
+    _, folder, name = repo.rsplit('/', 2)
+    base_dir = os.path.join('/home/git', folder)
+    repo_dir = os.path.join(base_dir, '%s.git' % name)
+    os.chdir(repo_dir)
+    subprocess.check_call(['git', 'pull'])

@@ -1,0 +1,7 @@
+project_config:
+  name: twoface
+  image_name: 'Ubuntu 12.04 cloudimg amd64'
+  remote_user: ubuntu
+  flavor_name: m1.xlarge
+  provision_script_path: './provision.sh'
+  auto_provision: True
