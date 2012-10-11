@@ -4,18 +4,22 @@ import argparse
 import subprocess
 import os
 
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser()
 parser.add_argument('--repo-file', default='/etc/twoface/repositories')
 args = parser.parse_args()
 
 for repo in open(args.repo_file).readlines():
     repo = repo.rstrip('\n')
     _, folder, name = repo.rsplit('/', 2)
+
     base_dir = os.path.join('/home/git', folder)
-    repo_dir = os.path.join(base_dir, '%s.git' % name)
-    if os.path.exists(base_dir):
-        os.chdir(repo_dir)
-        subprocess.check_call(['git', 'pull'])
-    else:
+    if not os.path.exists(base_dir):
         os.mkdir(base_dir)
-        subprocess.check_call(['git', 'clone', '--bare', repo, repo_dir])
+
+    repo_dir = os.path.join(base_dir, '%s.git' % name)
+    if not os.path.exists(repo_dir):
+        subprocess.check_call(['git', 'clone', '--mirror', repo, repo_dir])
+    else:
+        os.chdir(repo_dir)
+        subprocess.check_call(['git', 'fetch'])
+        subprocess.check_call(['git', 'remote', 'prune', 'origin'])
