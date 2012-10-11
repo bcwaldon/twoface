@@ -18,7 +18,7 @@ EOF
 sudo apt-get update
 sudo apt-get install -y git git-core python-setuptools
 
-sudo adduser -home /home/git --disabled-password --quiet git
+sudo adduser -home /home/git --disabled-password --gecos '' git
 
 git clone http://github.com/bcwaldon/twoface
 cd twoface
