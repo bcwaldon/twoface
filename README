@@ -1,3 +1,5 @@
+This tool is designed to create a VM and instruct it to mirror a list of git repositories.
+
 1) Set the list of repositories you want to be hosted in provision.sh
 2) Assuming you have a functional cloudenvy environment, run 'envy up'
 3) Once the repos have been downloaded, you can use the cloudenvy ip in place of the original hostname. For example:
@@ -11,3 +13,5 @@ becomes
 
 Caveats
 - the 'git' user you use when git-cloning is set up with the SSH key of your local machine
+- twoface can only clone using read-only http, it can't use git over ssh (use http://github.com/... rather than git@github.com:...)
+- the mirrored repositories are only updated once a minute
