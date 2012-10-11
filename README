@@ -1,0 +1,13 @@
+1) Set the list of repositories you want to be hosted in provision.sh
+2) Assuming you have a functional cloudenvy environment, run 'envy up'
+3) Once the repos have been downloaded, you can use the cloudenvy ip in place of the original hostname. For example:
+
+  http://github.com/openstack/nova.git
+
+becomes
+
+  git@10.0.0.7:openstack/nova.git
+
+
+Caveats
+- the 'git' user you use when git-cloning is set up with the SSH key of your local machine
